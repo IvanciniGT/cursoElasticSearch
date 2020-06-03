@@ -19,8 +19,6 @@ services:
   nodo2:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
     container_name: nodo2
-    ports:
-      - 8081:9200
     volumes:
       - /home/ubuntu/environment/datos/nodo2:/usr/share/elasticsearch/data
     environment:
@@ -34,8 +32,6 @@ services:
   nodo3:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
     container_name: nodo3
-    ports:
-      - 8082:9200
     volumes:
       - /home/ubuntu/environment/datos/nodo3:/usr/share/elasticsearch/data
     environment:
@@ -48,12 +44,16 @@ services:
   cerebro:
     image: lmenezes/cerebro:0.8.5
     container_name: cerebro
+    ports:
+      - 8081:9000
     volumes:
       - ./application.conf:/opt/cerebro/conf/application.conf
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.5.2
+    image: docker.elastic.co/kibana/kibana:7.7.0
     container_name: kibana
+    ports:
+      - 8082:5601
     environment:
       ELASTICSEARCH_HOSTS: "http://nodo1:9200"
       SERVER_NAME: "kibana"
