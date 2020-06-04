@@ -114,6 +114,7 @@ services:
       - node.data=true 
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
+      - node.attr.color=azul
           
   data4:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
@@ -131,7 +132,8 @@ services:
       - node.data=true 
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
-          
+      - node.attr.color=azul,verde
+
           
   ingesta1:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
