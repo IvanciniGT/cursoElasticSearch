@@ -498,6 +498,7 @@ services:
       - 8081:9000
     volumes:
       - ./application.conf:/opt/cerebro/conf/application.conf
+      - /home/ubuntu/environment/datos/certs/ca:/opt/cerebro/ca
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.7.0
@@ -510,10 +511,18 @@ services:
       - /home/ubuntu/environment/datos/certs/kibana:/usr/share/kibana/config/certificates/own
       - /home/ubuntu/environment/datos/certs/ca:/usr/share/kibana/config/certificates/ca
     environment:
-      ELASTICSEARCH_HOSTS: "http://coordinador1:9200"
+      ELASTICSEARCH_HOSTS: "https://coordinador1:9200"
       SERVER_NAME: "kibana"
       SERVER_HOST: "kibana"
 
+      ELASTICSEARCH_USERNAME: "elastic"
+      ELASTICSEARCH_PASSWORD: "password"
+      ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES:  "/etc/kibana/config/certs/ca/ca.crt" 
+      
+      ##### Para que cuando yo como usuario me conecte con kibana también sea por https
+      SERVER_SSL_ENABLED: "false" # true
+      SERVER_SSL_CERTIFICATE: "/etc/kibana/config/certs/kibana/kibana.crt"
+      SERVER_SSL_KEY: "/etc/kibana/config/certs/kibana/kibana.key"
 
   create_certs:
     container_name: create_certs
