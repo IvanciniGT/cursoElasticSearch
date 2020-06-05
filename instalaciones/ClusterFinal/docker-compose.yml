@@ -508,8 +508,8 @@ services:
     networks:
       - frontnet
     volumes:
-      - /home/ubuntu/environment/datos/certs/kibana:/usr/share/kibana/config/certificates/own
-      - /home/ubuntu/environment/datos/certs/ca:/usr/share/kibana/config/certificates/ca
+      - /home/ubuntu/environment/datos/certs/kibana:/etc/kibana/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/etc/kibana/config/certificates/ca
     environment:
       ELASTICSEARCH_HOSTS: "https://coordinador1:9200"
       SERVER_NAME: "kibana"
