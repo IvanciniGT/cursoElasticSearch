@@ -60,7 +60,29 @@ services:
       - node.data=false 
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
-    
+
+
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/maestro1.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/maestro1.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/maestro1.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/maestro1.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
+
           
 
   maestro2:
@@ -84,6 +106,27 @@ services:
       - node.data=false 
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
+
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/maestro2.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/maestro2.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/maestro2.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/maestro2.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
           
           
   data1:
@@ -107,6 +150,27 @@ services:
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
 
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/data1.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data1.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data1.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/data1.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
+
   data2:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
     container_name: data2
@@ -127,7 +191,28 @@ services:
       - node.data=true 
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
-          
+ 
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/data2.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data2.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data2.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/data2.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
+         
   data3:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
     container_name: data3
@@ -149,6 +234,27 @@ services:
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
       - node.attr.color=azul
+
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/data3.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data3.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data3.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/data3.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
           
   data4:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
@@ -171,6 +277,27 @@ services:
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
       - node.attr.color=azul,verde
+
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/data4.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data4.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/data4.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/data4.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
 
           
   ingesta1:
@@ -195,6 +322,27 @@ services:
       - node.data=false 
       - node.ingest=true 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
+
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/ingesta1.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/ingesta1.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/ingesta1.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/ingesta1.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
           
           
   ingesta2:
@@ -219,7 +367,28 @@ services:
       - node.data=false 
       - node.ingest=true 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
-          
+ 
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/ingesta2.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/ingesta2.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/ingesta2.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/ingesta2.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
+         
           
   coordinador1:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
@@ -250,7 +419,28 @@ services:
       - node.data=false 
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
-          
+ 
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/coordinador1.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/coordinador1.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/coordinador1.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/coordinador1.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
+         
           
   coordinador2:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
@@ -274,7 +464,28 @@ services:
       - node.data=false 
       - node.ingest=false 
       - node.remote_cluster_client=false  # cluster.remote.connect: false 
-          
+ 
+      - xpack.license.self_generated.type=trial # basic
+      - xpack.security.enabled=true
+
+      - xpack.security.http.ssl.enabled=true #SSL1
+      - xpack.security.http.ssl.key=/usr/share/elasticsearch/config/certificates/own/coordinador2.key
+      - xpack.security.http.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/coordinador2.crt
+
+      - xpack.security.transport.ssl.enabled=true #SSL2
+      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=/usr/share/elasticsearch/config/certificates/own/coordinador2.crt
+      - xpack.security.transport.ssl.key=/usr/share/elasticsearch/config/certificates/own/coordinador2.key
+     
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.join.timeout=180s
+      - cluster.publish.timeout=180s
+      
+      # usuario: elastic
+      - ELASTIC_PASSWORD=password 
+         
 
 
           
