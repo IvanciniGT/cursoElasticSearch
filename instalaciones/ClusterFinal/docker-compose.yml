@@ -44,6 +44,8 @@ services:
       - 8080:9200
     volumes:
       - /home/ubuntu/environment/datos/nodo1:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/maestro1:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
     environment:
@@ -66,6 +68,8 @@ services:
     container_name: maestro2
     volumes:
       - /home/ubuntu/environment/datos/nodo2:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/maestro2:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
     environment:
@@ -87,6 +91,8 @@ services:
     container_name: data1
     volumes:
       - /home/ubuntu/environment/datos/nodo3:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/data1:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
     environment:
@@ -106,6 +112,8 @@ services:
     container_name: data2
     volumes:
       - /home/ubuntu/environment/datos/nodo4:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/data2:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
     environment:
@@ -125,6 +133,8 @@ services:
     container_name: data3
     volumes:
       - /home/ubuntu/environment/datos/nodo5:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/data3:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
     environment:
@@ -145,6 +155,8 @@ services:
     container_name: data4
     volumes:
       - /home/ubuntu/environment/datos/nodo6:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/data4:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
     environment:
@@ -166,10 +178,13 @@ services:
     container_name: ingesta1
     volumes:
       - /home/ubuntu/environment/datos/nodo7:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/ingesta1:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
-      - backnet
-      - frontnet
+      - backnet # _eth0_
+      - frontnet # eth1_
     environment:
+      - transport.host=_eth0_
       - node.name=ingesta1
       - cluster.name=MiCluster
       - discovery.seed_hosts=maestro1,maestro2
@@ -187,10 +202,13 @@ services:
     container_name: ingesta2
     volumes:
       - /home/ubuntu/environment/datos/nodo8:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/ingesta2:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
       - frontnet
     environment:
+      - transport.host=_eth0_
       - node.name=ingesta2
       - cluster.name=MiCluster
       - discovery.seed_hosts=maestro1,maestro2
@@ -208,10 +226,20 @@ services:
     container_name: coordinador1
     volumes:
       - /home/ubuntu/environment/datos/nodo9:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/coordinador1:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
-      - backnet
-      - frontnet
+      - backnet #eth0 9300
+      - frontnet #eth1 
+      #               v 9200 y com. rest
+      # Network.host (HTTP.host.port y TRANSPORT.host.port)
+      #                                ^ 9300 y com. internas
     environment:
+      #- network.host=0.0.0.0 -> Tanto transport como http abren sus puertos para 0.0.0.0
+#      - http.port=9247
+#      - transport.port=9351
+#      - transport.host=_eth1_
+      - transport.host=_eth0_
       - node.name=coordinador1
       - cluster.name=MiCluster
       - discovery.seed_hosts=maestro1,maestro2
@@ -229,10 +257,13 @@ services:
     container_name: coordinador2
     volumes:
       - /home/ubuntu/environment/datos/nodo10:/usr/share/elasticsearch/data
+      - /home/ubuntu/environment/datos/certs/coordinador2:/usr/share/elasticsearch/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/elasticsearch/config/certificates/ca
     networks:
       - backnet
       - frontnet
     environment:
+      - transport.host=_eth0_
       - node.name=coordinador2
       - cluster.name=MiCluster
       - discovery.seed_hosts=maestro1,maestro2
@@ -264,6 +295,9 @@ services:
       - 8082:5601
     networks:
       - frontnet
+    volumes:
+      - /home/ubuntu/environment/datos/certs/kibana:/usr/share/kibana/config/certificates/own
+      - /home/ubuntu/environment/datos/certs/ca:/usr/share/kibana/config/certificates/ca
     environment:
       ELASTICSEARCH_HOSTS: "http://coordinador1:9200"
       SERVER_NAME: "kibana"
@@ -292,7 +326,8 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/ubuntu/data/certs'
+#OJO !!!!                   v               v
+      device: '/home/ubuntu/environment/datos/certs'
  
 networks:
   backnet:
